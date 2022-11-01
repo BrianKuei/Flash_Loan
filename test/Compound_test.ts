@@ -1,5 +1,5 @@
 import { takeSnapshot, SnapshotRestorer } from "@nomicfoundation/hardhat-network-helpers";
-import { assert, expect } from "chai";
+import { expect } from "chai";
 import { ethers } from "hardhat";
 import { parseUnits } from "ethers/lib/utils";
 import { CErc20Immutable, Comptroller, UnderlyingToken } from "../typechain-types";
@@ -61,7 +61,6 @@ before(async function () {
     const SimplePriceOracleFactory = await ethers.getContractFactory("SimplePriceOracle");
     simplePriceOracle = await SimplePriceOracleFactory.deploy();
     simplePriceOracle.deployed();
-
     comptroller._setPriceOracle(simplePriceOracle.address);
 
     snapshot = await takeSnapshot();
@@ -72,23 +71,23 @@ afterEach(async function () {
     await snapshot.restore();
 });
 
-describe("Test Market", function () {
-    it("Should be able to mint/redeem with token A", async function () {
+describe("Test mint and redeem", function () {
+    it("Should be able to mint and redeem with underlyingToken", async () => {
         const [userA] = await ethers.getSigners();
 
-        // mint
+        // userA 先要有些錢才能 mint 出 cErc20Token
         await underlyingToken.transfer(userA.address, parseUnits("100", 18));
         expect(await underlyingToken.balanceOf(userA.address)).to.equal(parseUnits("100", 18));
+
+        // mint
         await underlyingToken.connect(userA).approve(cErc20Token.address, parseUnits("100", 18));
         await cErc20Token.connect(userA).mint(parseUnits("100", 18));
-        
+        expect(await cErc20Token.balanceOf(userA.address)).to.equal(parseUnits("100", 18));
+
         // redeem
         const userABalance = await cErc20Token.balanceOf(userA.address);
         expect(userABalance).to.equal(parseUnits("100", 18));
         await cErc20Token.connect(userA).redeem(userABalance.toString());
         expect(await cErc20Token.balanceOf(userA.address)).to.equal(0);
-    
     });
-
-
 });
