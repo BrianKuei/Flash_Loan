@@ -8,6 +8,7 @@ import "compound-protocol/contracts/ComptrollerInterface.sol";
 import "compound-protocol/contracts/ComptrollerStorage.sol";
 import "compound-protocol/contracts/Unitroller.sol";
 import "compound-protocol/contracts/Governance/Comp.sol";
+import "hardhat/console.sol";
 
 /**
  * @title Compound's Comptroller Contract
