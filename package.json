@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "colors": "^1.4.0",
     "compound-protocol": "github:compound-finance/compound-protocol",
     "dotenv": "^16.0.3"
+  },
+  "_moduleAliases": {
+    "@": "./"
   }
 }
