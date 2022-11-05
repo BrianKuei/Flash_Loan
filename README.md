@@ -11,6 +11,7 @@ ALCHEMY_KEY="past your alchemy key"
 完成 env 設定後在 terminal 中輸入:
 
 ```shell
-npm install
+npm install --force
+npx hardhat compile
 npx hardhat test
 ```
