@@ -1,5 +1,5 @@
 import "colors";
-import { Comptroller } from "../../typechain-types";
+import { Comptroller } from "@/typechain-types";
 
 export async function printAccountLiquidity(
   accountAddress: string,
