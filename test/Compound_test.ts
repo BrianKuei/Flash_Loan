@@ -206,17 +206,16 @@ describe("Test borrow and liquidation", function () {
             comptroller
         } = await loadFixture(setUpBorrowRepayContext);
 
-        await comptroller._setCloseFactor(parseUnits("0.5", 18));
-        await comptroller._setLiquidationIncentive(parseUnits("1", 18));
-        await comptroller._setCloseFactor(parseUnits("0.5", 18));
+        await comptroller._setLiquidationIncentive(parseUnits("1", 18)); // 清算人的獎勵
+        await comptroller._setCloseFactor(parseUnits("0.5", 18)); // 可清算 token 的比例
         await comptroller._setCollateralFactor(cErc20TokenB.address, parseUnits("0.2", 18));
-        console.log('modify collateral factor');
+        console.log('after modify collateral factor'.bgMagenta);
         await printAccountLiquidity(userA.address, comptroller);
 
         await underlyingERC20TokenA.transfer(userB.address, parseUnits("20", 18));
         await underlyingERC20TokenA.connect(userB).approve(cErc20TokenA.address, parseUnits("20", 18));
 
-        //                              要償還的 cToken.      幫償還的人               被清算的人       清算數量              想拿到的 cToken
+        //                              要償還的 cToken       幫償還的人               被清算的人       清算數量              想拿到的 cToken
         const liquidateBorrowTx = await cErc20TokenA.connect(userB).liquidateBorrow(userA.address, parseUnits("20", 18), cErc20TokenB.address);
         const liquidateBorrowEventInfo = (await liquidateBorrowTx.wait()).events?.reduce((map, cur) => {
             return cur?.event && !map.has(cur.event) && map.set(cur.event, cur.args), map;
@@ -240,7 +239,7 @@ describe("Test borrow and liquidation", function () {
         await simplePriceOracle.setUnderlyingPrice(cErc20TokenB.address, parseUnits("30", 18));
         await comptroller._setLiquidationIncentive(parseUnits("1", 18));
         await comptroller._setCloseFactor(parseUnits("0.5", 18));
-
+        console.log('after modify collateral factor'.bgMagenta);
         await printAccountLiquidity(userA.address, comptroller);
 
         await underlyingERC20TokenA.transfer(userB.address, parseUnits("20", 18));
