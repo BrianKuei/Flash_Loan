@@ -13,5 +13,11 @@ ALCHEMY_KEY="past your alchemy key"
 ```shell
 npm install --force
 npx hardhat compile
-npx hardhat test
+
+Q1~Q5:
+npx hardhat test ./test/Compound_test.ts
+
+Q6:
+npx hardhat test ./test/Flashloan_test.ts 
+
 ```

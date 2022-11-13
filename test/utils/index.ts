@@ -1,5 +1,7 @@
 import "colors";
 import { Comptroller } from "@/typechain-types";
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 export async function printAccountLiquidity(
   accountAddress: string,
@@ -26,4 +28,6 @@ export async function printAccountLiquidity(
           shortfall.toString().red
       );
   }
+
+  return shortfall;
 }

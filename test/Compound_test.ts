@@ -36,7 +36,7 @@ async function deployContractsFixture() {
         parseUnits("0", 18),  // baseRatePerYear = 0
         parseUnits("0", 18)   // multiplierPerYear = 0
     );
-    whitePaperInterestRate.deployed();
+    // whitePaperInterestRate.deployed();
 
     // CErc20Immutable
     const CErc20ImmutableFactory = await ethers.getContractFactory("CErc20Immutable");

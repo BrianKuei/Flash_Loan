@@ -5,7 +5,7 @@ dotenv.config()
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.17",
+    version: "0.8.10",
     settings: {
       optimizer: {
         enabled: true,
@@ -17,9 +17,9 @@ const config: HardhatUserConfig = {
     hardhat: {
       forking: {
         url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
-        blockNumber: 14390000,
-        enabled: true
-      }
+        blockNumber: 15815693,
+      },
+      allowUnlimitedContractSize: true,
     },
   },
 };

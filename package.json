@@ -1,19 +1,22 @@
 {
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@typechain/hardhat": "^6.1.2",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.7",
     "chai": "^4.3.6",
     "hardhat": "^2.12.0",
     "ts-node": "^10.9.1",
+    "dotenv": "^16.0.3",
     "typescript": "^4.8.4"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "@aave/protocol-v2": "^1.0.1",
+    "@uniswap/v3-periphery": "^1.4.3",
     "colors": "^1.4.0",
-    "compound-protocol": "github:compound-finance/compound-protocol",
-    "dotenv": "^16.0.3"
+    "compound-protocol": "github:compound-finance/compound-protocol"
   },
   "_moduleAliases": {
     "@": "./"
